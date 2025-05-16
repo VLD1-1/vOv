@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Словарь для компьютерщиков</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .term-list { display: none; }
+        .term-list.active { display: block; }
+        .letter-section { display: none; }
+        .letter-section.active { display: block; }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-6 max-w-4xl">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Словарь для компьютерщиков</h1>
+
+        <!-- Вкладки -->
+        <div class="flex justify-center mb-4">
+            <button class="tab-button px-4 py-2 mx-2 bg-blue-500 text-white rounded hover:bg-blue-600 active" data-tab="slang">Жаргонные термины</button>
+            <button class="tab-button px-4 py-2 mx-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400" data-tab="professional">Профессиональные термины</button>
+        </div>
+
+        <!-- Поиск -->
+        <div class="mb-6">
+            <input type="text" id="search" class="w-full p-2 border rounded" placeholder="Поиск термина...">
+        </div>
+
+        <!-- Алфавитная навигация -->
+        <div class="flex flex-wrap justify-center mb-6">
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="all">Все</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="А">А</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Б">Б</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="В">В</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Г">Г</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Д">Д</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Е">Е</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Ж">Ж</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="З">З</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="И">И</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Й">Й</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="К">К</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Л">Л</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="М">М</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Н">Н</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="О">О</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="П">П</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Р">Р</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="С">С</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Т">Т</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="У">У</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Ф">Ф</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Х">Х</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Ц">Ц</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Ч">Ч</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Ш">Ш</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Щ">Щ</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Ъ">Ъ</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Ы">Ы</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Ь">Ь</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Э">Э</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Ю">Ю</button>
+            <button class="letter-button px-2 py-1 m-1 bg-gray-200 rounded hover:bg-gray-300" data-letter="Я">Я</button>
+        </div>
+
+        <!-- Жаргонные термины -->
+        <div id="slang" class="term-list active">
+            <div class="letter-section" data-letter="А">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">А</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Алгоритм</strong>: Набор инструкций для решения задачи компьютером.</li>
+                    <li><strong>Архиватор</strong>: Программа для сжатия файлов.</li>
+                    <li><strong>Апгрейд</strong>: Обновление оборудования или ПО для улучшения работы.</li>
+                    <li><strong>Автозагрузка</strong>: Программы, запускающиеся при старте системы.</li>
+                    <li><strong>Админка</strong>: Интерфейс для управления сайтом или сервером.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Б">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Б</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Бэкенд</strong>: Серверная часть разработки веб-сайтов.</li>
+                    <li><strong>Бинарник</strong>: Исполняемый файл в двоичном формате.</li>
+                    <li><strong>Баг</strong>: Ошибка в коде, нарушающая работу программы.</li>
+                    <li><strong>Бэкап</strong>: Резервная копия данных.</li>
+                    <li><strong>Браузер</strong>: Программа для просмотра веб-страниц.</li>
+                    <li><strong>Бот</strong>: Программа, выполняющая автоматические действия.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="В">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">В</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Вебка</strong>: Веб-камера для видеосвязи.</li>
+                    <li><strong>Виджет</strong>: Небольшой интерфейсный элемент приложения.</li>
+                    <li><strong>Виртуалка</strong>: Виртуальная машина для эмуляции системы.</li>
+                    <li><strong>Валидация</strong>: Проверка корректности данных.</li>
+                    <li><strong>Винт</strong>: Жесткий диск компьютера.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Г">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Г</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Глюк</strong>: Непредвиденный сбой в программе.</li>
+                    <li><strong>Гит</strong>: Система контроля версий для кода.</li>
+                    <li><strong>Гига</strong>: Сокращение от гигабайта.</li>
+                    <li><strong>Гаджет</strong>: Маленькое устройство или приложение.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Д">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Д</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Дебаг</strong>: Поиск и исправление ошибок в коде.</li>
+                    <li><strong>Деплой</strong>: Развертывание программы на сервере.</li>
+                    <li><strong>Дамп</strong>: Снимок памяти программы для анализа.</li>
+                    <li><strong>Движок</strong>: Основной компонент программы или игры.</li>
+                    <li><strong>Дроп</strong>: Удаление данных или файлов.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Е">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Е</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Единица</strong>: Сленг для обозначения одного бита или байта.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Ж">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Ж</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Железо</strong>: Аппаратное обеспечение компьютера.</li>
+                    <li><strong>Журнал</strong>: Лог событий программы или системы.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="З">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">З</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Залипуха</strong>: Мелкая ошибка, вызывающая неудобства.</li>
+                    <li><strong>Заплатка</strong>: Быстрое исправление ошибки в программе.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="И">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">И</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Интерфейс</strong>: Способ взаимодействия с программой.</li>
+                    <li><strong>Итерация</strong>: Повторение цикла в коде.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="К">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">К</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Кэш</strong>: Временное хранилище для ускорения доступа.</li>
+                    <li><strong>Кодер</strong>: Программист, пишущий код.</li>
+                    <li><strong>Костыль</strong>: Временное решение проблемы в коде.</li>
+                    <li><strong>Краш</strong>: Аварийное завершение программы.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Л">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Л</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Лаг</strong>: Задержка в работе программы или сети.</li>
+                    <li><strong>Локалка</strong>: Локальная сеть.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="М">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">М</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Макрос</strong>: Автоматизированная последовательность команд.</li>
+                    <li><strong>Модем</strong>: Устройство для подключения к интернету.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Н">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Н</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Нуб</strong>: Новичок в программировании или играх.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="О">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">О</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Оверхед</strong>: Дополнительные затраты ресурсов.</li>
+                    <li><strong>Очистка</strong>: Удаление ненужных данных или кэша.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="П">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">П</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Патч</strong>: Обновление для исправления ошибок.</li>
+                    <li><strong>Пинг</strong>: Проверка скорости соединения с сервером.</li>
+                    <li><strong>Пиксель</strong>: Минимальная единица изображения.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Профессиональные термины -->
+        <div id="professional" class="term-list">
+            <div class="letter-section" data-letter="А">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">А</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Абстрактный тип данных</strong>: Модель данных, определенная поведением.</li>
+                    <li><strong>Абстрактный метод</strong>: Метод без реализации, только сигнатура.</li>
+                    <li><strong>Абстракция</strong>: Упрощение путем удаления деталей.</li>
+                    <li><strong>Алгоритм</strong>: Инструкции для решения вычислительных задач.</li>
+                    <li><strong>Агрегатная функция</strong>: Функция для группировки данных.</li>
+                    <li><strong>Анализ сложности</strong>: Оценка ресурсов алгоритма.</li>
+                    <li><strong>Архитектура ПО</strong>: Структура программной системы.</li>
+                    <li><strong>Ассоциативный массив</strong>: Тип данных с парами ключ-значение.</li>
+                    <li><strong>Автомат</strong>: Математическая модель вычислений.</li>
+                    <li><strong>Авторизация</strong>: Проверка прав доступа.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Б">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Б</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>База данных</strong>: Организованный набор данных.</li>
+                    <li><strong>Байесовская сеть</strong>: Модель для вероятностных выводов.</li>
+                    <li><strong>Бинарное дерево</strong>: Структура с узлами до двух детей.</li>
+                    <li><strong>Бит</strong>: Единица информации (0 или 1).</li>
+                    <li><strong>Блокчейн</strong>: Распределенная база данных транзакций.</li>
+                    <li><strong>Булева алгебра</strong>: Алгебра с операциями истина/ложь.</li>
+                    <li><strong>Буфер</strong>: Временное хранилище данных.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="В">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">В</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Виртуализация</strong>: Эмуляция аппаратного обеспечения.</li>
+                    <li><strong>Временная сложность</strong>: Время выполнения алгоритма.</li>
+                    <li><strong>Вычислительная модель</strong>: Абстракция вычислительного процесса.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Г">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Г</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Гипертекст</strong>: Текст с ссылками на другие данные.</li>
+                    <li><strong>Граф</strong>: Структура данных из узлов и ребер.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Д">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Д</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Двоичный поиск</strong>: Поиск в отсортированном массиве.</li>
+                    <li><strong>Декомпозиция</strong>: Разбиение задачи на части.</li>
+                    <li><strong>Детерминированный автомат</strong>: Автомат с однозначными переходами.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="И">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">И</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Идентификатор</strong>: Уникальное имя объекта в программе.</li>
+                    <li><strong>Инкапсуляция</strong>: Сокрытие внутренней реализации объекта.</li>
+                    <li><strong>Интерпретатор</strong>: Программа, выполняющая код построчно.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="К">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">К</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Кэширование</strong>: Хранение данных для быстрого доступа.</li>
+                    <li><strong>Компиляция</strong>: Преобразование кода в машинный язык.</li>
+                    <li><strong>Криптография</strong>: Методы защиты данных.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="М">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">М</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Машинное обучение</strong>: Алгоритмы, обучающиеся на данных.</li>
+                    <li><strong>Многопоточность</strong>: Выполнение нескольких задач одновременно.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Н">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Н</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Наследование</strong>: Механизм передачи свойств в ООП.</li>
+                    <li><strong>Нормализация</strong>: Устранение избыточности в базе данных.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="О">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">О</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Объект</strong>: Экземпляр класса в программировании.</li>
+                    <li><strong>Оптимизация</strong>: Улучшение производительности кода.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="П">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">П</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Параллелизм</strong>: Одновременное выполнение задач.</li>
+                    <li><strong>Полиморфизм</strong>: Разные реализации одного интерфейса.</li>
+                    <li><strong>Протокол</strong>: Правила обмена данными в сети.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Р">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Р</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Рекурсия</strong>: Вызов функции самой себя.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="С">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">С</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Сжатие данных</strong>: Уменьшение объема данных.</li>
+                    <li><strong>Синтаксис</strong>: Правила написания кода.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="Т">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">Т</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Тестирование</strong>: Проверка работоспособности программы.</li>
+                </ul>
+            </div>
+            <div class="letter-section" data-letter="У">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-2">У</h2>
+                <ul class="list-disc pl-6">
+                    <li><strong>Условный оператор</strong>: Код, зависящий от условия.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Блок автора -->
+        <footer class="mt-8 text-center text-gray-600 text-sm border-t pt-4">
+            <p>Автор: Славгородский Владимир</p>
+            <p>Группа: КС-21</p>
+        </footer>
+
+        <script>
+            // Переключение вкладок
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const termLists = document.querySelectorAll('.term-list');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tabButtons.forEach(btn => btn.classList.remove('bg-blue-500', 'text-white'));
+                    button.classList.add('bg-blue-500', 'text-white');
+                    termLists.forEach(list => list.classList.remove('active'));
+                    document.getElementById(button.dataset.tab).classList.add('active');
+                    // Показать все термины
+                    const activeTab = document.querySelector('.term-list.active');
+                    activeTab.querySelectorAll('.letter-section').forEach(section => section.classList.add('active'));
+                    // Сбросить поиск
+                    document.getElementById('search').value = '';
+                    activeTab.querySelectorAll('li').forEach(term => term.style.display = 'list-item');
+                });
+            });
+
+            // Фильтр по буквам
+            const letterButtons = document.querySelectorAll('.letter-button');
+            letterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const letter = button.dataset.letter;
+                    const activeTab = document.querySelector('.term-list.active');
+                    const sections = activeTab.querySelectorAll('.letter-section');
+                    
+                    sections.forEach(section => section.classList.remove('active'));
+                    if (letter === 'all') {
+                        sections.forEach(section => section.classList.add('active'));
+                    } else {
+                        const targetSection = activeTab.querySelector(`.letter-section[data-letter="${letter}"]`);
+                        if (targetSection) targetSection.classList.add('active');
+                    }
+                    // Сбросить поиск
+                    document.getElementById('search').value = '';
+                    activeTab.querySelectorAll('li').forEach(term => term.style.display = 'list-item');
+                });
+            });
+
+            // Поиск
+            const searchInput = document.getElementById('search');
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase();
+                const activeTab = document.querySelector('.term-list.active');
+                const sections = activeTab.querySelectorAll('.letter-section');
+                
+                sections.forEach(section => {
+                    const terms = section.querySelectorAll('li');
+                    let hasVisibleTerms = false;
+                    terms.forEach(term => {
+                        const text = term.textContent.toLowerCase();
+                        const isVisible = text.includes(query);
+                        term.style.display = isVisible ? 'list-item' : 'none';
+                        if (isVisible) hasVisibleTerms = true;
+                    });
+                    section.style.display = hasVisibleTerms ? 'block' : 'none';
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>
